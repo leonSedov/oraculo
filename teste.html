@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oráculo | Futuro Digital</title>
+    <meta name="description" content="Soluções criativas e tecnológicas para transformar sua marca." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-deep: #0a0a1a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-light: #f0eef8;
+            --text-muted: #9a94b0;
+            --gradient-1: linear-gradient(135deg, #7c3aed, #ec4899);
+            --gradient-2: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --gradient-3: linear-gradient(135deg, #f43f5e, #f97316);
+            --glow: 0 0 60px rgba(124, 58, 237, 0.25);
+            --radius: 28px;
+            --font: 'Space Grotesk', sans-serif;
+            --ease: cubic-bezier(0.65, 0, 0.35, 1);
+            --spacing: 100px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg-deep);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: #ec4899;
+            color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== UTILITY ===== */
+        .section-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #ec4899;
+            background: rgba(236, 72, 153, 0.10);
+            padding: 4px 16px;
+            border-radius: 100px;
+            border: 1px solid rgba(236, 72, 153, 0.15);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 12px auto 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 34px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s var(--ease);
+            background: transparent;
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: #fff;
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.30);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(124, 58, 237, 0.45);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-secondary:hover {
+            border-color: #ec4899;
+            background: rgba(236, 72, 153, 0.08);
+            color: #fff;
+        }
+
+        .btn-sm {
+            padding: 8px 22px;
+            font-size: 0.8rem;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 0;
+            transition: all 0.4s var(--ease);
+        }
+
+        .header.scrolled {
+            padding: 10px 0;
+            background: rgba(10, 10, 26, 0.78);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s var(--ease);
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.6rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 0 80px;
+            overflow: hidden;
+            background: var(--bg-deep);
+        }
+
+        .hero-bg-anim {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(ellipse at 30% 40%, rgba(124, 58, 237, 0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(236, 72, 153, 0.10) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
+            animation: bgPulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 6px 18px 6px 10px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            backdrop-filter: blur(4px);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: dotPulse 2s infinite;
+        }
+
+        @keyframes dotPulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(0.6);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.8rem, 7vw, 5.2rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-typed {
+            display: inline-block;
+            border-right: 3px solid #ec4899;
+            padding-right: 6px;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                border-color: #ec4899;
+            }
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 36px;
+            line-height: 1.8;
+        }
+
+        .hero-btns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        /* ===== FLOATING SHAPES ===== */
+        .shapes {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+            animation: floatShape 12s ease-in-out infinite alternate;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: #7c3aed;
+            top: -80px;
+            right: -80px;
+            animation-duration: 14s;
+        }
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: #ec4899;
+            bottom: -40px;
+            left: -40px;
+            animation-duration: 10s;
+            animation-delay: 2s;
+        }
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: #3b82f6;
+            top: 40%;
+            left: 10%;
+            animation-duration: 16s;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatShape {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+        }
+
+        /* ===== CLIENTS ===== */
+        .clients {
+            background: rgba(255, 255, 255, 0.01);
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            overflow: hidden;
+        }
+
+        .clients-label {
+            text-align: center;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .clients-track-wrap {
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .clients-track {
+            display: flex;
+            gap: 40px;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+        }
+
+        .clients-track:hover {
+            animation-play-state: paused;
+        }
+
+        .client-logo {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.3;
+            transition: opacity 0.4s;
+            filter: grayscale(1) brightness(1.6);
+        }
+
+        .client-logo:hover {
+            opacity: 1;
+            filter: grayscale(0) brightness(1);
+        }
+
+        .client-logo-lg {
+            height: 60px;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: var(--spacing) 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 48px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            transition: all 0.4s var(--ease);
+            position: relative;
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: var(--radius);
+            padding: 1px;
+            background: var(--gradient-1);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s var(--ease);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--glow);
+            border-color: transparent;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(124, 58, 237, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #a78bfa;
+            transition: all 0.4s;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--gradient-1);
+            color: #fff;
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .service-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .service-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        .service-link {
+            margin-top: 16px;
+            color: #a78bfa;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.3s;
+        }
+
+        .service-link:hover {
+            gap: 12px;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: var(--spacing) 0;
+            background: rgba(255, 255, 255, 0.01);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--glow);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
+            transition: transform 0.6s var(--ease);
+        }
+
+        .about-image:hover {
+            transform: perspective(1200px) rotateY(0) rotateX(0);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-content .section-title {
+            text-align: left;
+        }
+
+        .about-content .section-desc {
+            text-align: left;
+            margin: 16px 0 32px;
+            max-width: 100%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: border-color 0.3s;
+        }
+
+        .stat-item:hover {
+            border-color: rgba(124, 58, 237, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ===== PORTFOLIO ===== */
+        .portfolio {
+            padding: var(--spacing) 0;
+        }
+
+        .portfolio-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 40px 0 48px;
+        }
+
+        .tab-btn {
+            padding: 8px 24px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--gradient-1);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .portfolio-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.4s var(--ease);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: var(--glow);
+            border-color: rgba(124, 58, 237, 0.15);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--ease);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 26, 0.92) 0%, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            opacity: 0;
+            transition: opacity 0.5s var(--ease);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-category {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #a78bfa;
+            margin-bottom: 4px;
+        }
+
+        .portfolio-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .portfolio-link {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.01);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
+        }
+
+        .cta .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .cta-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 0 auto 32px;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            padding: var(--spacing) 0;
+        }
+
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: var(--glow);
+            margin-top: 48px;
+        }
+
+        .contact-info {
+            padding: 48px 36px;
+            background: linear-gradient(145deg, rgba(124, 58, 237, 0.04), rgba(236, 72, 153, 0.04));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info .section-tag {
+            margin-bottom: 8px;
+        }
+
+        .contact-info .section-title {
+            font-size: 1.8rem;
+            text-align: left;
+            margin-bottom: 8px;
+        }
+
+        .contact-info .section-desc {
+            text-align: left;
+            margin: 0 0 28px;
+            max-width: 100%;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .contact-item .icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(124, 58, 237, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a78bfa;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item .text h4 {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .contact-item .text p,
+        .contact-item .text a {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .contact-item .text a:hover {
+            color: #a78bfa;
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .contact-social a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .contact-social a:hover {
+            background: var(--gradient-1);
+            color: #fff;
+            border-color: transparent;
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            padding: 48px 36px;
+        }
+
+        .contact-form .form-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .contact-form .form-sub {
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #7c3aed;
+            background: rgba(124, 58, 237, 0.03);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.06);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            background: var(--gradient-1);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(124, 58, 237, 0.30);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .map-wrap {
+            margin-top: 40px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 240px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .map-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: rgba(255, 255, 255, 0.01);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            max-width: 280px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: var(--gradient-1);
+            color: #fff;
+            transform: translateY(-3px);
+            border-color: transparent;
+        }
+
+        .footer-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #a78bfa;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-contact i {
+            color: #a78bfa;
+            width: 18px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding-top: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        /* ===== REVEAL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s var(--ease);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .about-content .section-title,
+            .about-content .section-desc {
+                text-align: center;
+            }
+            .stats-grid {
+                justify-items: center;
+            }
+            .contact-wrap {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--bg-deep);
+                flex-direction: column;
+                justify-content: center;
+                padding: 40px;
+                gap: 24px;
+                transition: right 0.4s var(--ease);
+                border-left: 1px solid rgba(255, 255, 255, 0.04);
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links .btn {
+                margin: 0;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .hero {
+                padding: 100px 0 60px;
+                min-height: auto;
+            }
+            .hero-title {
+                font-size: 2.4rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .contact-info,
+            .contact-form {
+                padding: 32px 24px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .clients-track {
+                gap: 24px;
+            }
+            .client-logo {
+                height: 28px;
+            }
+            .client-logo-lg {
+                height: 44px;
+            }
+            .shape-1,
+            .shape-2,
+            .shape-3 {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-btns .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .portfolio-tabs {
+                gap: 6px;
+            }
+            .tab-btn {
+                padding: 6px 16px;
+                font-size: 0.7rem;
+            }
+            .contact-info .section-title {
+                font-size: 1.4rem;
+            }
+            .shape {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">
+                    <img src="logo_menu-removebg-1.png" alt="Oráculo" />
+                    <span>Oráculo</span>
+                </a>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                    <li><a href="#contact" class="btn btn-primary btn-sm">Orçamento</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="hero-bg-anim"></div>
+        <div class="shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-badge">
+                <span class="dot"></span> Inovação &amp; Tecnologia
+            </div>
+            <h1 class="hero-title">
+                Transforme o futuro <br />
+                <span class="gradient-text"><span class="hero-typed" id="typedText"></span></span>
+            </h1>
+            <p class="hero-desc">
+                Soluções integradas de design, tecnologia e estratégia para elevar sua presença digital a um novo patamar.
+            </p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn btn-primary">Comece agora <i class="fas fa-arrow-right"></i></a>
+                <a href="#portfolio" class="btn btn-secondary">Ver portfólio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CLIENTS ===== -->
+    <section class="clients">
+        <div class="container">
+            <p class="clients-label">Marcas que confiam em nós</p>
+            <div class="clients-track-wrap">
+                <div class="clients-track" id="clientsTrack">
+                    <img src="logos clientes/egle.png" alt="Egle" class="client-logo client-logo-lg" />
+                    <img src="logos clientes/neuza alves.png" alt="Neuza Alves" class="client-logo client-logo-lg" />
+                    <img src="logos clientes/morais dias.png" alt="Morais Dias" class="client-logo" />
+                    <img src="logos clientes/Logo escritório .PNG" alt="Mariana Ferrolho" class="client-logo" />
+                    <img src="logos clientes/Captura de tela 2025-07-18 204429.png" alt="CMC Advogados" class="client-logo" />
+                    <img src="logos clientes/maquinas de sonhos.png" alt="Máquina de Sonhos" class="client-logo" />
+                    <img src="logos clientes/para elas.webp" alt="Para Elas" class="client-logo" />
+                    <img src="logos clientes/palhares motos.png" alt="Palhares Motos" class="client-logo" />
+                    <!-- duplicados -->
+                    <img src="logos clientes/egle.png" alt="Egle" class="client-logo client-logo-lg" />
+                    <img src="logos clientes/neuza alves.png" alt="Neuza Alves" class="client-logo client-logo-lg" />
+                    <img src="logos clientes/morais dias.png" alt="Morais Dias" class="client-logo" />
+                    <img src="logos clientes/Logo escritório .PNG" alt="Mariana Ferrolho" class="client-logo" />
+                    <img src="logos clientes/Captura de tela 2025-07-18 204429.png" alt="CMC Advogados" class="client-logo" />
+                    <img src="logos clientes/maquinas de sonhos.png" alt="Máquina de Sonhos" class="client-logo" />
+                    <img src="logos clientes/para elas.webp" alt="Para Elas" class="client-logo" />
+                    <img src="logos clientes/palhares motos.png" alt="Palhares Motos" class="client-logo" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-tag">O que fazemos</span>
+                <h2 class="section-title">Nossos <span class="gradient-text">Serviços</span></h2>
+                <p class="section-desc">Da estratégia à execução, oferecemos soluções completas para impulsionar sua marca.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon"><i class="fas fa-ad"></i></div>
+                    <h3 class="service-title">Marketing Digital</h3>
+                    <p class="service-desc">Tráfego pago, orgânico, SEO e campanhas de alta conversão para escalar seu negócio.</p>
+                    <a href="#" class="service-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3 class="service-title">Desenvolvimento Web</h3>
+                    <p class="service-desc">Sites, e-commerces e sistemas com performance, segurança e design responsivo.</p>
+                    <a href="#" class="service-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3 class="service-title">Identidade Visual</h3>
+                    <p class="service-desc">Marcas memoráveis com logotipos, paletas e toda a linguagem visual que comunica sua essência.</p>
+                    <a href="#" class="service-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon"><i class="fas fa-video"></i></div>
+                    <h3 class="service-title">Produção Audiovisual</h3>
+                    <p class="service-desc">Vídeos institucionais, animações e conteúdo para redes sociais e campanhas.</p>
+                    <a href="#" class="service-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3 class="service-title">Aplicativos Mobile</h3>
+                    <p class="service-desc">Apps nativos e híbridos para iOS e Android com foco em usabilidade e performance.</p>
+                    <a href="#" class="service-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="service-title">Estratégia Digital</h3>
+                    <p class="service-desc">Planejamento de posicionamento, análise de concorrência e growth hacking.</p>
+                    <a href="#" class="service-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Equipe Oráculo" />
+                </div>
+                <div class="about-content reveal reveal-delay-2">
+                    <span class="section-tag">Quem somos</span>
+                    <h2 class="section-title">Mais que uma agência, <span class="gradient-text">parceiros</span> do seu sucesso</h2>
+                    <p class="section-desc">
+                        Fundado em 2024, o Projeto Oráculo nasceu da união de ex-estudantes e estudantes do IFRN apaixonados por tecnologia, criatividade e inovação. Somos um grupo diverso, movido pelo desejo de transformar ideias em soluções digitais que impactam pessoas e negócios.
+                    </p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="50">0</div>
+                            <div class="stat-label">Projetos Entregues</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="15">0</div>
+                            <div class="stat-label">Clientes Satisfeitos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="100">0</div>
+                            <div class="stat-label">% Foco no Cliente</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="24">0</div>
+                            <div class="stat-label">Suporte Contínuo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PORTFOLIO ===== -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-tag">Cases</span>
+                <h2 class="section-title">Nossos <span class="gradient-text">Trabalhos</span></h2>
+                <p class="section-desc">Projetos que entregamos com excelência, gerando resultados reais para nossos clientes.</p>
+            </div>
+            <div class="portfolio-tabs reveal">
+                <button class="tab-btn active" data-filter="all">Todos</button>
+                <button class="tab-btn" data-filter="web">Web</button>
+                <button class="tab-btn" data-filter="branding">Branding</button>
+                <button class="tab-btn" data-filter="social">Social Media</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item reveal" data-category="web">
+                    <img src="neuza card2.webp" alt="Campanha Neuza Alves" />
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Desenvolvimento Web</span>
+                        <h3 class="portfolio-title">Campanha Digital - Neuza Alves</h3>
+                        <a href="https://alvesadvocacia.netlify.app/" class="portfolio-link" target="_blank"></a>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-1" data-category="branding">
+                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1528&q=80" alt="E-commerce Para Elas" />
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Identidade Visual</span>
+                        <h3 class="portfolio-title">E-commerce - Loja Para Elas</h3>
+                        <a href="https://paraelascollection.lojavirtualnuvem.com.br/" class="portfolio-link" target="_blank"></a>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-2" data-category="social">
+                    <img src="egle para portfolio.png" alt="Campanha Egle Gonçalves" />
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Social Media</span>
+                        <h3 class="portfolio-title">Campanha Digital - Egle Gonçalves</h3>
+                        <a href="https://eglegoncalves.netlify.app" class="portfolio-link" target="_blank"></a>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal" data-category="web">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80" alt="Plataforma E-learning" />
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Desenvolvimento Web</span>
+                        <h3 class="portfolio-title">Plataforma E-learning</h3>
+                        <a href="#" class="portfolio-link"></a>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-1" data-category="branding">
+                    <img src="museu.png" alt="Museu Máquina de Sonhos" />
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Identidade Visual</span>
+                        <h3 class="portfolio-title">Museu Máquina de Sonhos</h3>
+                        <a href="#" class="portfolio-link"></a>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-2" data-category="social">
+                    <img src="redes sociais.png" alt="Gestão de Redes Morais Dias" />
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Social Media</span>
+                        <h3 class="portfolio-title">Gestão de Redes - Morais Dias</h3>
+                        <a href="#" class="portfolio-link"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta">
+        <div class="container">
+            <div class="reveal">
+                <h2 class="cta-title">Pronto para transformar sua <span class="gradient-text">presença digital</span>?</h2>
+                <p class="cta-desc">Nossa equipe está pronta para entender suas necessidades e criar soluções personalizadas que impulsionarão seu negócio.</p>
+                <a href="#contact" class="btn btn-primary">Comece agora <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="section-tag">Contato</span>
+                <h2 class="section-title">Fale <span class="gradient-text">Conosco</span></h2>
+                <p class="section-desc">Tem um projeto em mente ou quer saber mais sobre nossos serviços? Entre em contato.</p>
+            </div>
+            <div class="contact-wrap reveal">
+                <div class="contact-info">
+                    <span class="section-tag">Informações</span>
+                    <h2 class="section-title">Vamos conversar?</h2>
+                    <p class="section-desc">Estamos aqui para ajudar. Escolha o canal mais conveniente para você.</p>
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="text">
+                            <h4>Endereço</h4>
+                            <p>Av. Principal, 1234, Sala 501<br />Natal/RN - Brasil</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <div class="text">
+                            <h4>Email</h4>
+                            <a href="mailto:contato@projetooraculo.com">contato@projetooraculo.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="text">
+                            <h4>Telefone</h4>
+                            <a href="tel:+5584999999999">(84) 99999-9999</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="text">
+                            <h4>WhatsApp</h4>
+                            <a href="https://wa.me/5584999999999">(84) 98888-8888</a>
+                        </div>
+                    </div>
+                    <div class="contact-social">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3 class="form-title">Envie uma mensagem</h3>
+                    <p class="form-sub">Preencha o formulário e retornaremos em até 24h.</p>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nome completo</label>
+                            <input type="text" id="name" class="form-control" placeholder="Seu nome" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" class="form-control" placeholder="seu@email.com" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefone</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="(84) 99999-9999" />
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Assunto</label>
+                            <select id="subject" class="form-control" required>
+                                <option value="" disabled selected>Selecione um assunto</option>
+                                <option value="orcamento">Solicitar Orçamento</option>
+                                <option value="duvida">Tirar Dúvidas</option>
+                                <option value="parceria">Proposta de Parceria</option>
+                                <option value="trabalhe-conosco">Trabalhe Conosco</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" class="form-control" placeholder="Descreva seu projeto ou dúvida..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Enviar mensagem
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="map-wrap reveal">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.204394130304!2d-35.20948592544145!3d-5.826490457213976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwNDknMzUuNCJTIDM1wrAxMiczNS4wIlc!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img src="logo_menu-removebg-1.png" alt="Oráculo" style="height:38px;" />
+                        <span>Oráculo</span>
+                    </div>
+                    <p>O Projeto Oráculo é uma agência especializada em soluções criativas e tecnológicas para transformar sua presença digital.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">Serviços</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Marketing Digital</a></li>
+                        <li><a href="#">Desenvolvimento Web</a></li>
+                        <li><a href="#">Identidade Visual</a></li>
+                        <li><a href="#">Produção Audiovisual</a></li>
+                        <li><a href="#">Aplicativos Mobile</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Contato</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Principal, 123 - Sala 45<br />Natal/RN - Brasil</p>
+                        <p><i class="fas fa-envelope"></i> contato@projetooraculo.com</p>
+                        <p><i class="fas fa-phone"></i> (84) 99999-9999</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Projeto Oráculo. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ========== TYPED TEXT ==========
+            const typedEl = document.getElementById('typedText');
+            const words = ['Inteligente', 'Inovador', 'Estratégico', 'Criativo'];
+            let wordIdx = 0,
+                charIdx = 0,
+                deleting = false;
+            let speed = 80;
+
+            function type() {
+                const current = words[wordIdx];
+                if (deleting) {
+                    typedEl.textContent = current.substring(0, charIdx - 1);
+                    charIdx--;
+                    speed = 40;
+                } else {
+                    typedEl.textContent = current.substring(0, charIdx + 1);
+                    charIdx++;
+                    speed = 80;
+                }
+
+                if (!deleting && charIdx === current.length) {
+                    deleting = true;
+                    speed = 1800;
+                } else if (deleting && charIdx === 0) {
+                    deleting = false;
+                    wordIdx = (wordIdx + 1) % words.length;
+                    speed = 300;
+                }
+                setTimeout(type, speed);
+            }
+
+            // ========== MOBILE MENU ==========
+            const toggle = document.getElementById('mobileToggle');
+            const nav = document.getElementById('navLinks');
+
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+                toggle.innerHTML = nav.classList.contains('active') ?
+                    '<i class="fas fa-times"></i>' :
+                    '<i class="fas fa-bars"></i>';
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('active');
+                    document.body.style.overflow = '';
+                    toggle.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+            // ========== HEADER SCROLL ==========
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 60);
+            });
+
+            // ========== PORTFOLIO FILTER ==========
+            const tabs = document.querySelectorAll('.tab-btn');
+            const items = document.querySelectorAll('.portfolio-item');
+
+            tabs.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabs.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.dataset.filter;
+                    items.forEach(item => {
+                        const cat = item.dataset.category;
+                        item.style.display = (filter === 'all' || cat === filter) ? 'block' : 'none';
+                    });
+                });
+            });
+
+            // ========== SCROLL REVEAL ==========
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+            reveals.forEach(el => observer.observe(el));
+
+            // ========== STATS COUNTER ==========
+            const stats = document.querySelectorAll('.stat-number');
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = parseInt(el.dataset.count, 10);
+                        let current = 0;
+                        const inc = target / 60;
+                        const timer = setInterval(() => {
+                            current += inc;
+                            if (current >= target) {
+                                el.textContent = target + (target === 100 ? '%' : '+');
+                                clearInterval(timer);
+                            } else {
+                                el.textContent = Math.floor(current) + (target === 100 ? '%' : '');
+                            }
+                        }, 20);
+                        statsObserver.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            stats.forEach(el => statsObserver.observe(el));
+
+            // ========== PHONE MASK ==========
+            const phone = document.getElementById('phone');
+            phone.addEventListener('input', function() {
+                let v = this.value.replace(/\D/g, '');
+                if (v.length > 11) v = v.substring(0, 11);
+                if (v.length > 0) {
+                    v = v.replace(/^(\d{2})(\d)/, '($1) $2');
+                    if (v.length > 10) v = v.replace(/(\d)(\d{4})$/, '$1-$2');
+                    else if (v.length > 6) v = v.replace(/(\d)(\d{4})/, '$1-$2');
+                }
+                this.value = v;
+            });
+
+            // ========== FORM ==========
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value.trim();
+
+                if (!name || !email || !subject || !message) {
+                    alert('Por favor, preencha todos os campos obrigatórios.');
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+                setTimeout(() => {
+                    alert(`Obrigado, ${name}! Sua mensagem sobre "${subject}" foi enviada com sucesso. Entraremos em contato em breve.`);
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar mensagem';
+                }, 1500);
+            });
+
+            // ========== INIT ==========
+            setTimeout(type, 800);
+
+        })();
+    </script>
+
+</body>
+</html>
